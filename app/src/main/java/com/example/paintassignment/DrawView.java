@@ -13,6 +13,9 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static android.graphics.Color.colorToHSV;
+import static android.graphics.Color.rgb;
+
 
 public class DrawView extends View implements View.OnTouchListener
 {
@@ -70,6 +73,7 @@ public class DrawView extends View implements View.OnTouchListener
         for (int i = 0; i < event.getPointerCount(); i++)
         {
             points.add(new Point(event.getX(i), event.getY(i), new Random().nextInt(), r));
+            //points.add(new Point(event.getX(i), event.getY(i), rgb(0,0,139), r));
         }
 
         invalidate();
@@ -92,5 +96,20 @@ public class DrawView extends View implements View.OnTouchListener
             redopaint.remove(redopaint.size() - 1);
             invalidate();
         }
+    }
+
+    //Clear Function
+    public void Clear() {
+        points.clear();
+        invalidate();
+
+    }
+
+    //Clear Function
+    public void ChangeColor() {
+
+        points.add(new Point(getX(),getY(),new Random().nextInt(),r));
+        invalidate();
+
     }
 }

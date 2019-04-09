@@ -18,6 +18,9 @@ public class MainActivity extends AppCompatActivity {
 
         Button undo = findViewById(R.id.undo);
         Button redo = findViewById(R.id.redo);
+        Button clear = findViewById(R.id.clear);
+        Button changecolor = findViewById(R.id.changecolor);
+
 
         undo.setOnClickListener(new View.OnClickListener()
         {
@@ -34,6 +37,24 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v)
             {
                 onClick.Redo();
+            }
+        });
+
+        clear.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                onClick.Clear();
+            }
+        });
+
+        changecolor.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                onClick.ChangeColor();
             }
         });
 
