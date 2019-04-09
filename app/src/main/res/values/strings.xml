@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">PaintAssignment</string>
+    <string name="clear">CLEAR</string>
+    <string name="undo">UNDO</string>
+    <string name="redo">REDO</string>
+    <string name="change_color">CHANGE COLOR</string>
 </resources>
