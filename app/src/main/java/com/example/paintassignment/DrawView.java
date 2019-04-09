@@ -19,9 +19,7 @@ public class DrawView extends View implements View.OnTouchListener
 
     PointF point = new PointF();
     ArrayList<Point> points = new ArrayList<Point>();
-    MainActivity main = new MainActivity();
-    private boolean clear;
-
+    ArrayList<Point> redopaint = new ArrayList<Point>();
     public void setRadius(float r)
     {
         this.r = r;
@@ -76,5 +74,23 @@ public class DrawView extends View implements View.OnTouchListener
 
         invalidate();
         return true;
+    }
+    //Undo Function
+    public void Undo()
+    {
+        if (points.size()>0)
+        {
+            redopaint.add(points.get(points.size()-1));
+            points.remove(points.size()-1);
+            invalidate();
+        }
+    }
+    //Redo Function
+    public void Redo() {
+        if (redopaint.size() > 0) {
+            points.add(redopaint.get(redopaint.size() - 1));
+            redopaint.remove(redopaint.size() - 1);
+            invalidate();
+        }
     }
 }

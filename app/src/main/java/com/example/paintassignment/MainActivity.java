@@ -1,6 +1,4 @@
 package com.example.paintassignment;
-
-import android.graphics.Canvas;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,14 +7,36 @@ import android.widget.SeekBar;
 
 public class MainActivity extends AppCompatActivity {
 
+    DrawView onClick;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final DrawView pv = findViewById(R.id.View);
-        int i=0;
+        onClick = findViewById(R.id.View);
+
+        Button undo = findViewById(R.id.undo);
+        Button redo = findViewById(R.id.redo);
+
+        undo.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                onClick.Undo();
+            }
+        });
+
+        redo.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                onClick.Redo();
+            }
+        });
+
 
 
         SeekBar seekBar = findViewById(R.id.seekBar);
@@ -24,8 +44,8 @@ public class MainActivity extends AppCompatActivity {
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                pv.setRadius(i);
-                pv.invalidate();
+                onClick.setRadius(i);
+                onClick.invalidate();
             }
 
             @Override
