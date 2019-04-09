@@ -15,15 +15,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final DrawView dv = findViewById(R.id.View);
-        dv.setRadius(5);
+        final DrawView pv = findViewById(R.id.View);
+        int i=0;
+
 
         SeekBar seekBar = findViewById(R.id.seekBar);
+
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                dv.setRadius(i);
-                 dv.invalidate();
+                pv.setRadius(i);
+                pv.invalidate();
             }
 
             @Override

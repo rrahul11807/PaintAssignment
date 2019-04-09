@@ -2,81 +2,79 @@ package com.example.paintassignment;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
+
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.util.AttributeSet;
+
 import android.view.MotionEvent;
 import android.view.View;
 
 import java.util.ArrayList;
+import java.util.Random;
 
-public class DrawView extends View implements View.OnTouchListener{
 
-   class PaintCoordinate
-   {
-       PointF pt;
-       float radius;
-   }
+public class DrawView extends View implements View.OnTouchListener
+{
 
-   ArrayList <PaintCoordinate> points = new ArrayList<PaintCoordinate>();
+    PointF point = new PointF();
+    ArrayList<Point> points = new ArrayList<Point>();
+    MainActivity main = new MainActivity();
+    private boolean clear;
 
-   public float getRadius()
-   {
-       return radius;
-   }
-
-   public void setRadius(float radius)
-   {
-       this.radius = radius;
-   }
-   float radius = 3;
-
-    public DrawView(Context context) {
-        super(context);
-        setup();
-    }
-
-    public DrawView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        setup();
-    }
-
-    public DrawView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        setup();
-    }
-
-    public void setup()
+    public void setRadius(float r)
     {
-        setOnTouchListener(this);
+        this.r = r;
     }
+
+    float r = 50;
+
+    public DrawView(Context context)
+    {
+        super(context);
+        setOnTouchListener(this);
+        point.x = 300;
+        point.y = 300;
+    }
+
+    public DrawView(Context context, AttributeSet attrs)
+    {
+        super(context, attrs);
+        setOnTouchListener(this);
+        point.x = 300;
+        point.y = 300;
+    }
+
+    public DrawView(Context context, AttributeSet attrs, int defStyleAttr)
+    {
+        super(context, attrs, defStyleAttr);
+        setOnTouchListener(this);
+        point.x = 300;
+        point.y = 300;
+    }
+
     @Override
-    protected void onDraw(Canvas canvas){
+    protected void onDraw(Canvas canvas)
+    {
+        super.onDraw(canvas);
+
         Paint paint = new Paint();
-
-        paint.setColor(Color.RED);
-
-        for(PaintCoordinate pc : points)
+        for (Point pt : points)
         {
-            canvas.drawCircle(pc.pt.x, pc.pt.y, pc.radius, paint);
+            paint.setColor(pt.colour);
+            canvas.drawCircle(pt.x, pt.y, pt.radius, paint);
         }
     }
+
     @Override
-    public boolean onTouch(View view, MotionEvent motionEvent)
+    public boolean onTouch(View v, MotionEvent event)
     {
-        PaintCoordinate pc = new PaintCoordinate();
-        PointF pt = new PointF();
-        pt.set( motionEvent.getX(),motionEvent.getY());
-
-        pc.pt = pt;
-        pc.radius = radius;
-
-        points.add(pc);
+        for (int i = 0; i < event.getPointerCount(); i++)
+        {
+            points.add(new Point(event.getX(i), event.getY(i), new Random().nextInt(), r));
+        }
 
         invalidate();
-
         return true;
     }
-
 }
